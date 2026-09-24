@@ -34,3 +34,11 @@ def display_tasks(tasks):
             status_icon = "[x]" if t.get("status") == "Completed" else "[ ]"
             print(f"{t.get('id', 'N/A')}. {status_icon} {t.get('title', 'Untitled')}")
     print("-" * 35)
+    
+def save_tasks(tasks):
+    """Saves the current task list back to tasks.json."""
+    try:
+        with open(DATA_FILE, "w") as f:
+            json.dump(tasks, f, indent=4)
+    except Exception as e:
+        print(f"Error saving tasks: {e}")
