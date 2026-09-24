@@ -7,8 +7,12 @@ Author: Clythix
 import argparse
 from core import load_tasks, display_tasks, save_tasks
 
+VERSION = "1.0.0"
+
 def main():
     parser = argparse.ArgumentParser(description="TaskFlow CLI - Manage tasks from your terminal.")
+    parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {VERSION}")
+    
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # 'list' command
