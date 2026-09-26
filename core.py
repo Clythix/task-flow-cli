@@ -42,3 +42,16 @@ def save_tasks(tasks):
             json.dump(tasks, f, indent=4)
     except Exception as e:
         print(f"Error saving tasks: {e}")
+
+def remove_task(task_id):
+    """Removes a task by its ID and saves the updated list."""
+    tasks = load_tasks()
+    updated_tasks = [t for t in tasks if t.get("id") != task_id]
+    
+    if len(updated_tasks) == len(tasks):
+        print(f"Error: Task with ID {task_id} not found.")
+        return False
+        
+    save_tasks(updated_tasks)
+    print(f"Successfully removed task ID: {task_id}")
+    return True
