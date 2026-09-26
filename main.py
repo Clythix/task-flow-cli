@@ -5,7 +5,7 @@ Author: Clythix
 """
 
 import argparse
-from core import load_tasks, display_tasks, save_tasks
+from core import load_tasks, display_tasks, save_tasks, remove_task
 
 VERSION = "1.0.0"
 
@@ -22,6 +22,10 @@ def main():
     add_parser = subparsers.add_parser("add", help="Add a new task")
     add_parser.add_argument("title", type=str, help="The title of the task")
 
+    # 'remove' command
+    remove_parser = subparsers.add_parser("remove", help="Remove a task by ID")
+    remove_parser.add_argument("id", type=int, help="The ID of the task to remove")
+
     args = parser.parse_args()
 
     tasks = load_tasks()
@@ -32,6 +36,8 @@ def main():
         tasks.append(new_task)
         save_tasks(tasks)
         print(f"Successfully added task: '{args.title}' (ID: {new_id})")
+    elif args.command == "remove":
+        remove_task(args.id)
     else:
         # Default action: list tasks
         display_tasks(tasks)
